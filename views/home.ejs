@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title%>
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div id="container">
+        <div class="header">
+            <h1>
+                <%= title%>
+            </h1>
+        </div>
+        <form action="/create-task" method="POST">
+            <input class="add-task" type="text" name="task" placeholder="What do you need to do?" required>
+            <div class="option">
+                <div class="category">
+                    <label for="category">Choose Category:</label>
+
+                    <select id="category" name="category" required>
+                        <option value="work">Work</option>
+                        <option value="home">Home</option>
+                        <option value="personal">Personal</option>
+                        <option value="others">Others</option>
+                    </select>
+                </div>
+                <div class="date">
+                    <label for="birthday">Choose A Date</label>
+                    <input type="date" id="birthday" name="date" required>
+                </div>
+            </div>
+            <div class="btn">
+                <button type="submit" class="add-btn">Add Task</button>
+
+            </div>
+        </form>
+
+        <!-- Below is the list of saved items will be shown  -->
+        <form action="/delete-tasks" method="GET">
+           <!-- this will delete items -->
+            <div id="delete-task" class="btn">
+                <button type="submit" class="del-btn">Delete Task</button>
+            </div>
+
+            <ol type="1">
+                <% for (let i of todo_list) { %>
+
+                    <li class="task-list">
+                        <div id="task">
+                            <input type="checkbox" name="<%= i._id %>">
+                            <p>
+                                <%= i.task %>
+                            </p>
+                            <p>
+                                <%= i.date %>
+                            </p>
+                            <p>
+                                <%= i.category %>
+                            </p>
+                        </div>
+                    </li>
+
+                    <% } %>
+            </ol>
+        </form>
+
+    </div>
+
+</body>
+
+</html>
